@@ -18,8 +18,8 @@
     </div>
 <?php endif; ?>
 <?php if ($this->session->flashdata('success_msg')): ?>
-    <div class="alert alert-success alert-dismissible">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <div class="alert alert-success bg-success text-light border-0 alert-dismissible fade show" role="alert">
         <?php echo $this->session->flashdata('success_msg'); ?>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 <?php endif; ?>

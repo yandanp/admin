@@ -7,6 +7,7 @@ $this->load->view("templates/sidebar");
 $this->load->view("templates/topmenu");
   
 echo "<main id='main' class='main'>";
+                $this->load->view('alerts'); 
 
 echo $body;
 
