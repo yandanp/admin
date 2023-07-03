@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class AuthAdmin extends CI_Controller {
+class Auth extends CI_Controller {
 
     public function __construct()
     {
@@ -12,23 +12,12 @@ class AuthAdmin extends CI_Controller {
     }
 
     /**
-     * Load views from admin views path
-     * @param $view
-     * @param null $data
-     */
-    protected function admin_views($view, $data = null)
-    {
-        $data['judul'] = 'Login';
-        $this->load->view('admin/'.$view, $data);
-    }
-
-    /**
      * Login page
      */
-    public function index()
+    public function login()
 	{
-        if($this->smarty_acl->logged_in()){
-            return redirect('admin');
+        if($this->smarty_acl->logged_in(FALSE)){
+            return redirect('/login');
         }
 	    //Rules
         $this->form_validation->set_rules('username', 'Username', 'trim|required|alpha_dash');
@@ -40,26 +29,29 @@ class AuthAdmin extends CI_Controller {
             $login = $this->smarty_acl->login(
                 $this->input->post('username',true),
                 $this->input->post('password',true),
-                $this->input->post('remember',true)
+                $this->input->post('remember',true),
+                FALSE
             );
             //User logged in
             if($login){
                 $this->session->set_flashdata('success_msg','User logged in successfully!');
-                return redirect('/admin');
+                return redirect('/account');
             }
 
             $this->session->set_flashdata('error_msg',$this->smarty_acl->errors());
             return redirect(current_url());
         }
         //Load view
-		$this->admin_views('auth/login');
+        $data['judul'] = 'Login';
+
+		$this->load->view('auth/login', $data);
 	}
 
 	//Logout
 	public function logout()
 	{
-        $this->smarty_acl->logout();
-        return redirect('admin/login');
+        $this->smarty_acl->logout(FALSE);
+        return redirect('/login');
 	}
 
 	/**
@@ -67,7 +59,7 @@ class AuthAdmin extends CI_Controller {
 	 */
 	public function register()
 	{
-        if($this->smarty_acl->logged_in()){
+        if($this->smarty_acl->logged_in(FALSE)){
             return redirect('admin');
         }
 	    //Rules
@@ -79,7 +71,7 @@ class AuthAdmin extends CI_Controller {
         //Validate
         if ($this->form_validation->run() === TRUE) {
             //Register user
-            $register = $this->smarty_acl->register(
+            $register = $this->smarty_acl->register_user(
                 $this->input->post('username',true),
                 $this->input->post('password',true),
                 $this->input->post('email',true),
@@ -97,7 +89,7 @@ class AuthAdmin extends CI_Controller {
             return redirect(current_url());
         }
         //Load view
-        $this->admin_views('auth/register');
+        $this->load->view('auth/register');
 	}
 
 	/**
@@ -113,7 +105,7 @@ class AuthAdmin extends CI_Controller {
             return redirect('login');
         }
 	    //Activate user
-	    $activate = $this->smarty_acl->activate($user_id,$code);
+	    $activate = $this->smarty_acl->activate_user($user_id,$code);
 	    //Activation success
 	    if($activate){
             $this->session->set_flashdata('success_msg','Email confirmed successfully!');
@@ -129,15 +121,15 @@ class AuthAdmin extends CI_Controller {
 	 */
 	public function resend_activation()
 	{
-        if($this->smarty_acl->logged_in()){
-            return redirect('admin');
+        if($this->smarty_acl->logged_in(FALSE)){
+            return redirect('/');
         }
         //Rules
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
 
         //Validate
         if ($this->form_validation->run() === TRUE) {
-            $activation = $this->smarty_acl->resend_activation($this->input->post('email',true));
+            $activation = $this->smarty_acl->resend_activation($this->input->post('email',true),FALSE);
             if($activation){
                 $this->session->set_flashdata('success_msg','A fresh verification link has been sent to your email address!');
                 return redirect(current_url());
@@ -147,7 +139,7 @@ class AuthAdmin extends CI_Controller {
             return redirect(current_url());
         }
         //Load view
-        $this->admin_views('auth/passwords/activation');
+        $this->load->view('auth/passwords/activation');
 	}
 
 	/**
@@ -155,15 +147,15 @@ class AuthAdmin extends CI_Controller {
 	 */
 	public function forgot_password()
 	{
-        if($this->smarty_acl->logged_in()){
-            return redirect('admin');
+        if($this->smarty_acl->logged_in(FALSE)){
+            return redirect('/');
         }
         //Rules
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
 
         //Validate
         if ($this->form_validation->run() === TRUE) {
-            $forgotten = $this->smarty_acl->forgotten_password($this->input->post('email',true));
+            $forgotten = $this->smarty_acl->forgotten_password($this->input->post('email',true),FALSE);
             if($forgotten){
                 $this->session->set_flashdata('success_msg','Password Reset Email Sent!');
                 return redirect(current_url());
@@ -173,7 +165,7 @@ class AuthAdmin extends CI_Controller {
             return redirect(current_url());
         }
         //Load view
-        $this->admin_views('auth/passwords/forgot');
+        $this->load->view('auth/passwords/forgot');
 	}
 
 	/**
@@ -182,11 +174,11 @@ class AuthAdmin extends CI_Controller {
 	 */
 	public function reset_password($code)
 	{
-        if($this->smarty_acl->logged_in()){
-            return redirect('admin');
+        if($this->smarty_acl->logged_in(FALSE)){
+            return redirect('/');
         }
 	    //Validate code
-	    $user = $this->smarty_acl->forgotten_password_check($code);
+	    $user = $this->smarty_acl->forgotten_password_check($code,FALSE);
 	    if(!$user){
             $this->session->set_flashdata('error_msg',$this->smarty_acl->errors());
             return redirect('forgot_password');
@@ -202,6 +194,7 @@ class AuthAdmin extends CI_Controller {
                 $user,
                 $this->input->post('email',true),
                 $this->input->post('password',true),
+                FALSE
             );
             if($reset){
                 $this->session->set_flashdata('success_msg','Password Updated successfully!');
@@ -212,6 +205,6 @@ class AuthAdmin extends CI_Controller {
             return redirect(current_url());
         }
         //Load view
-        $this->admin_views('auth/passwords/reset',['code' => $code]);
+        $this->load->view('auth/passwords/reset',['code' => $code]);
 	}
 }

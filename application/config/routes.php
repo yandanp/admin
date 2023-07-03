@@ -53,6 +53,9 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['login'] = 'Auth/login';
+$route['logout'] = 'Auth/logout';
+
 /*
  * --------------------------------------------------------
  * ADMIN ROUTES
@@ -60,6 +63,8 @@ $route['translate_uri_dashes'] = FALSE;
  */
 //AUTH ROUTES
 $route['admin/login'] = 'AuthAdmin/index';
+$route['admin/logout'] = 'AuthAdmin/logout';
+
 
 $route['admin'] = 'Admin/index';
 //Roles
@@ -82,3 +87,5 @@ $route['admin/admins'] = 'Admin/admins';
 $route['admin/admins/create'] = 'Admin/admin_create';
 $route['admin/admins/edit/(:num)'] = 'Admin/admin_edit/$1';
 $route['admin/admins/delete/(:num)'] = 'Admin/admin_delete/$1';
+
+$route['admin/unauthorized'] = 'Welcome/unauthorized';

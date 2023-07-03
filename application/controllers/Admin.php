@@ -27,6 +27,8 @@ class Admin extends CI_Controller
 
     protected function logged_in()
     {
+        // var_dump($this->smarty_acl->authorized());
+
         if (!$this->smarty_acl->logged_in()) {
             return redirect('admin/login');
         }
@@ -38,11 +40,12 @@ class Admin extends CI_Controller
     public function index()
     {
         //print_r($this->session->userdata('login_admin_5dc3d3da95837cb55414978798a86fbee74dd54d'));
-        echo '<br><br>';
-        //var_dump($this->smarty_acl->authorized());
+        // var_dump($this->smarty_acl->authorized());
         // $this->admin_views('index');
+        // $this->load->view('welcome_message');
+        
         $data['judul'] = "Dashboard";
-        $this->template->load('app', 'admin/auth/dashboard', $data);
+        $this->template->load('app', 'admin/dashboard', $data);
     }
 
     /******************************* ROLES ******************************/
