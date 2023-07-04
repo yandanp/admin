@@ -49,7 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'welcome';
+$route['default_controller'] = 'AuthAdmin';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
@@ -62,16 +62,17 @@ $route['logout'] = 'Auth/logout';
  * --------------------------------------------------------
  */
 //AUTH ROUTES
+$route['admin'] = 'AuthAdmin/index';
 $route['admin/login'] = 'AuthAdmin/index';
 $route['admin/logout'] = 'AuthAdmin/logout';
 
 
-$route['admin'] = 'Admin/index';
+$route['dashboard'] = 'Dashboard/index';
 //Roles
-$route['admin/roles'] = 'Admin/roles';
-$route['admin/roles/create'] = 'Admin/role_create';
-$route['admin/roles/edit/(:num)'] = 'Admin/role_edit/$1';
-$route['admin/roles/delete/(:num)'] = 'Admin/role_delete/$1';
+$route['master/roles'] = 'Admin/roles';
+$route['master/roles/create'] = 'Admin/role_create';
+$route['master/roles/edit/(:num)'] = 'Admin/role_edit/$1';
+$route['master/roles/delete/(:num)'] = 'Admin/role_delete/$1';
 //Modules
 $route['admin/modules'] = 'Admin/modules';
 $route['admin/modules/create'] = 'Admin/module_create';

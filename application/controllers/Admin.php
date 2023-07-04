@@ -54,9 +54,11 @@ class Admin extends CI_Controller
      */
     public function roles()
     {
-        $URI = 'admin/roles';
-        $data = ['URI' => $URI, 'items' => $this->smarty_acl->roles()];
-        $this->admin_views('roles', $data);
+        $URI   = 'master/roles';
+        $judul = 'Roles';
+        $data  = ['URI' => $URI, 'judul' => $judul, 'items' => $this->smarty_acl->roles()];
+        // $this->admin_views('roles', $data);
+        $this->template->load('app', 'admin/roles', $data);
     }
 
     /*
@@ -80,16 +82,17 @@ class Admin extends CI_Controller
             //Created
             if ($role) {
                 $this->session->set_flashdata('success_msg', 'Role created successfully!');
-                return redirect('/admin/roles');
+                return redirect('/master/roles');
             }
             $this->session->set_flashdata('error_msg', $this->smarty_acl->errors());
             return redirect(current_url());
         }
         $data = [
+            'judul' => 'Tambah Role',
             'form_action' => base_url('admin/roles/create'),
             'modules' => $this->smarty_acl->modules(),
         ];
-        $this->admin_views('roles_form', $data);
+        $this->template->load('app', 'admin/roles_form', $data);        
     }
 
     /**

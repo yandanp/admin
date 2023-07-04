@@ -2,7 +2,7 @@
     <h3><?php echo $judul; ?></h3>
     <nav>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="<?php base_url() ?>">Home</a></li>
             <li class="breadcrumb-item active">Dashboard</li>
         </ol>
     </nav>

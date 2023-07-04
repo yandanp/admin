@@ -28,7 +28,7 @@ class AuthAdmin extends CI_Controller {
     public function index()
 	{
         if($this->smarty_acl->logged_in()){
-            return redirect('admin');
+            return redirect('dashboard');
         }
 	    //Rules
         $this->form_validation->set_rules('username', 'Username', 'trim|required|alpha_dash');
@@ -45,7 +45,7 @@ class AuthAdmin extends CI_Controller {
             //User logged in
             if($login){
                 $this->session->set_flashdata('success_msg','User logged in successfully!');
-                return redirect('/admin');
+                return redirect('/dashboard');
             }
 
             $this->session->set_flashdata('error_msg',$this->smarty_acl->errors());

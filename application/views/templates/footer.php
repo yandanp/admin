@@ -1,5 +1,5 @@
 <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
+  <footer id="footer" class="footer fixed-bottom">
     <div class="copyright">
       &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
     </div>
@@ -26,7 +26,16 @@
 
   <!-- Template Main JS File -->
   <script src="<?php echo base_url('assets/'); ?>admin/js/main.js"></script>
-
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script>
+    $(document).ready(function () {
+        //Checkbox toggle all
+        $('.toggle-checkbox').click( function () {
+            let target = $(this).data('toggle-checkbox');
+            $('input[class*="'+target+'"]').prop('checked', this.checked);
+        });
+    });
+</script>
 </body>
 
 </html>
