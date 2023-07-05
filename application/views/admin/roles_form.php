@@ -28,9 +28,9 @@
 								<div class="form-group">
 									<label>Name</label>
 									<input type="text" name="name" placeholder="Name" class="form-control" value="<?php echo $item->name ?? set_value('name'); ?>" required />
-									<div class="invalid-feedback">
-				                      	<?= form_error('name'); ?>
-				                    </div>
+				                    <div class="text-danger small">
+		                        		<?= form_error('name'); ?>                            
+		                            </div>
 								</div>
 							</div>
 							<div class="col-6">
@@ -45,7 +45,7 @@
 											echo 'selected';
 											} ?>>Inactive</option>
 									</select>
-									<div class="invalid-feedback">										
+									<div class="text-danger small">										
 										<?= form_error('status'); ?>
 									</div>
 								</div>

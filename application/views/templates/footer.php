@@ -44,7 +44,6 @@ $(document).ready(function() {
         Swal.fire({
             title: 'Apakah anda yakin',
             text: "Data akan dihapus!",
-            type: 'warning',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#e74c3c',

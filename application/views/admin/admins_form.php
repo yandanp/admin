@@ -22,14 +22,20 @@
 					</h5>
 				</div>
 				<div class="card-body">
-					<form class="row g-3 needs-validation" novalidate action="<?php echo $form_action ;?>" method="post">						
+					<form class="row g-1 needs-validation" novalidate action="<?php echo $form_action ;?>" method="post">						
                         <div class="col-12">
                             <label class="form-label">Username</label>
                             <input type="text" name="username" value="<?php echo $item->username ?? set_value('username'); ?>" placeholder="Username" class="form-control" required/>
+                            <div class="text-danger small">
+                                <?= form_error('username'); ?>                            
+                            </div>
                         </div>
                         <div class="col-12">
                             <label class="form-label">Email</label>
                             <input type="email" name="email" value="<?php echo $item->email ?? set_value('email'); ?>" placeholder="Email" class="form-control" required/>
+                            <div class="text-danger small">
+                                <?= form_error('email'); ?>                            
+                            </div>
                         </div>
                         <div class="col-12">
                             <label class="form-label">Name</label>

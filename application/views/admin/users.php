@@ -45,7 +45,7 @@
                                         <td>
                                             
                                             <a href="<?php echo base_url($URI.'/edit/' . $item->id); ?>" class="btn btn-sm btn-info"> Edit</a>
-                                            <a href="<?php echo base_url($URI.'/delete/' . $item->id); ?>" class="btn btn-sm btn-danger hapus <?php if($item->id===$this->smarty_acl->get_admin()['id']){ echo 'disabled';} ?>"> Delete</a>
+                                            <a href="<?php echo base_url($URI.'/delete/' . $item->id); ?>" class="btn btn-sm btn-danger hapus"> Delete</a>
                                         </td>
                                     </tr>
                                 <?php endforeach;  ?>
