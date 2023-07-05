@@ -74,19 +74,19 @@ $route['master/roles/create'] = 'Admin/role_create';
 $route['master/roles/edit/(:num)'] = 'Admin/role_edit/$1';
 $route['master/roles/delete/(:num)'] = 'Admin/role_delete/$1';
 //Modules
-$route['admin/modules'] = 'Admin/modules';
-$route['admin/modules/create'] = 'Admin/module_create';
-$route['admin/modules/edit/(:num)'] = 'Admin/module_edit/$1';
-$route['admin/modules/delete/(:num)'] = 'Admin/module_delete/$1';
+$route['master/modules'] = 'Admin/modules';
+$route['master/modules/create'] = 'Admin/module_create';
+$route['master/modules/edit/(:num)'] = 'Admin/module_edit/$1';
+$route['master/modules/delete/(:num)'] = 'Admin/module_delete/$1';
 //Users
-$route['admin/users'] = 'Admin/users';
-$route['admin/users/create'] = 'Admin/user_create';
-$route['admin/users/edit/(:num)'] = 'Admin/user_edit/$1';
-$route['admin/users/delete/(:num)'] = 'Admin/user_delete/$1';
+$route['master/users'] = 'Admin/users';
+$route['master/users/create'] = 'Admin/user_create';
+$route['master/users/edit/(:num)'] = 'Admin/user_edit/$1';
+$route['master/users/delete/(:num)'] = 'Admin/user_delete/$1';
 //Admins
-$route['admin/admins'] = 'Admin/admins';
-$route['admin/admins/create'] = 'Admin/admin_create';
-$route['admin/admins/edit/(:num)'] = 'Admin/admin_edit/$1';
-$route['admin/admins/delete/(:num)'] = 'Admin/admin_delete/$1';
+$route['master/admins'] = 'Admin/admins';
+$route['master/admins/create'] = 'Admin/admin_create';
+$route['master/admins/edit/(:num)'] = 'Admin/admin_edit/$1';
+$route['master/admins/delete/(:num)'] = 'Admin/admin_delete/$1';
 
-$route['admin/unauthorized'] = 'Welcome/unauthorized';
+$route['unauthorized'] = 'Welcome/unauthorized';

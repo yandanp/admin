@@ -1,9 +1,9 @@
-<?php if (validation_errors()): ?>
+<!-- <?php if (validation_errors()): ?>
     <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show" role="alert">
         <?php echo validation_errors('<li>','</li>'); ?>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>    
-<?php endif; ?>
+<?php endif; ?> -->
 
 <?php if ($this->session->flashdata('error_msg')): ?>
     <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show" role="alert">

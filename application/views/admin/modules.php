@@ -16,48 +16,44 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Manage Roles
+                    <h5 class="card-title">Manage Modules
                         <a href="<?php echo base_url($URI.'/create'); ?>" class="btn btn-success btn-sm"> Tambah</a>
                     </h5>
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th width="5%">#</th>
+                                    <th>#</th>
                                     <th>Name</th>
-                                    <th>Status</th>
+                                    <th>Controller</th>
+                                    <th>Permissions</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php 
-                        $no=1;
-                        if (count($items) > 0): foreach ($items as $item): 
-                        ?>
+                                $no=1;
+                                if (count($items) > 0): foreach ($items as $item): 
+                                ?>
                                 <tr>
-                                    <td>
-                                        <?= $no++; ?>
-                                    </td>
+                                    <td><?= $no++; ?></td>                                    
                                     <td>
                                         <?php echo $item->name; ?>
                                     </td>
                                     <td>
-                                        <?php echo ucfirst($item->status); ?>
+                                        <?php echo $item->controller; ?>
                                     </td>
                                     <td>
-                                        <!-- <form action="<?php echo base_url($URI.'/delete/' . $item->id); ?>" method="post" onsubmit="return confirm('Are you sure?');">
-                                    <div class="btn-group btn-group-sm"> <a href="<?php echo base_url($URI.'/edit/' . $item->id); ?>" class="btn btn-info"> Edit</a>
-                                        <button type="submit" class="btn btn-danger" <?php if($item->id==='1'){ echo 'disabled';} ?>> Delete</button>
-                                    </div>
-                                </form> -->
+                                        <?php echo count(json_decode($item->permissions,0)); ?>
+                                    </td>
+                                    <td>
                                         <a href="<?php echo base_url($URI.'/edit/' . $item->id); ?>" class="btn btn-sm btn-info"> Edit</a>
                                         <a href="<?php echo base_url($URI.'/delete/' . $item->id); ?>" class="btn btn-sm btn-danger hapus <?php if($item->id===$this->smarty_acl->get_admin()['id']){ echo 'disabled';} ?>"> Delete</a>
-                                        <!-- <button class="btn btn-sm btn-danger hapus" >Delete</button> -->
                                     </td>
                                 </tr>
                                 <?php endforeach; else: ?>
                                 <tr>
-                                    <td colspan="3" class="text-center">No results found!</td>
+                                    <td colspan="4" class="text-center">No results found!</td>
                                 </tr>
                                 <?php endif; ?>
                             </tbody>

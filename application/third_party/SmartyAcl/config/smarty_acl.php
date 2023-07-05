@@ -121,7 +121,7 @@ $config['default_role'] = 2;
  | Default route name for unauthorized access
  | Default:
  */
-$config['unauthorized_route'] = 'admin/unauthorized';
+$config['unauthorized_route'] = 'unauthorized';
 /*
  | -------------------------------------------------------------------------
  | Error and Messages Delimiters

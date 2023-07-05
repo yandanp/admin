@@ -20,11 +20,19 @@
   <!-- Vendor CSS Files -->
   <link href="<?php echo base_url('assets/'); ?>admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="<?php echo base_url('assets/'); ?>admin/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="<?php echo base_url('assets/'); ?>admin/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="<?php echo base_url('assets/'); ?>admin/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="<?php echo base_url('assets/'); ?>admin/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="<?php echo base_url('assets/'); ?>admin/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <!-- <link href="<?php echo base_url('assets/'); ?>admin/vendor/boxicons/css/boxicons.min.css" rel="stylesheet"> -->
+  <!-- <link href="<?php echo base_url('assets/'); ?>admin/vendor/quill/quill.snow.css" rel="stylesheet"> -->
+  <!-- <link href="<?php echo base_url('assets/'); ?>admin/vendor/quill/quill.bubble.css" rel="stylesheet"> -->
+  <!-- <link href="<?php echo base_url('assets/'); ?>admin/vendor/remixicon/remixicon.css" rel="stylesheet"> -->
   <link href="<?php echo base_url('assets/'); ?>admin/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.all.min.js
+"></script>
+<link href="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.min.css
+" rel="stylesheet">
 
   <!-- Template Main CSS File -->
   <link href="<?php echo base_url('assets/'); ?>admin/css/style.css" rel="stylesheet">

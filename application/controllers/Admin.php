@@ -71,7 +71,7 @@ class Admin extends CI_Controller
         //Rules
         $this->form_validation->set_rules('name', 'Name', 'trim|required');
         $this->form_validation->set_rules('status', 'Status', 'trim|required|alpha');
-        //Validate
+        //Validate        
         if ($this->form_validation->run() === TRUE) {
             //Create role
             $role = $this->smarty_acl->create_role([
@@ -89,7 +89,7 @@ class Admin extends CI_Controller
         }
         $data = [
             'judul' => 'Tambah Role',
-            'form_action' => base_url('admin/roles/create'),
+            'form_action' => base_url('master/roles/create'),
             'modules' => $this->smarty_acl->modules(),
         ];
         $this->template->load('app', 'admin/roles_form', $data);        
@@ -106,7 +106,7 @@ class Admin extends CI_Controller
         $item = $this->smarty_acl->role($role_id);
         if (!$item) {
             $this->session->set_flashdata('error_msg', 'Item not found!');
-            return redirect('admin/roles');
+            return redirect('master/roles');
         }
         //Rules
         $this->form_validation->set_rules('name', 'Name', 'trim|required');
@@ -122,18 +122,19 @@ class Admin extends CI_Controller
             //Updated
             if ($role_update) {
                 $this->session->set_flashdata('success_msg', 'Role updated successfully!');
-                return redirect('/admin/roles');
+                return redirect('/master/roles');
             }
             $this->session->set_flashdata('error_msg', $this->smarty_acl->errors());
             return redirect(current_url());
         }
         $data = [
-            'form_action' => base_url("admin/roles/edit/$role_id"),
+            'judul' => 'Edit Role',            
+            'form_action' => base_url("master/roles/edit/$role_id"),
             'item' => $item,
             'modules' => $this->smarty_acl->modules(),
             'module_permissions' => $this->smarty_acl->module_permissions($role_id),
         ];
-        $this->admin_views('roles_form', $data);
+        $this->template->load('app', 'admin/roles_form', $data);        
     }
 
     /**
@@ -147,17 +148,17 @@ class Admin extends CI_Controller
         $item = $this->smarty_acl->role($role_id);
         if (!$item) {
             $this->session->set_flashdata('error_msg', 'Item not found!');
-            return redirect('admin/roles');
+            return redirect('master/roles');
         }
         //Delete role
         $role_delete = $this->smarty_acl->delete_role($item->id);
         //Deleted
         if ($role_delete) {
             $this->session->set_flashdata('success_msg', 'Role deleted successfully!');
-            return redirect('/admin/roles');
+            return redirect('/master/roles');
         }
         $this->session->set_flashdata('error_msg', $this->smarty_acl->errors());
-        return redirect('/admin/roles');
+        return redirect('/master/roles');
     }
 
     /******************************* MODULES ******************************/
@@ -166,9 +167,10 @@ class Admin extends CI_Controller
      */
     public function modules()
     {
-        $URI = 'admin/modules';
-        $data = ['URI' => $URI, 'items' => $this->smarty_acl->modules()];
-        $this->admin_views('modules', $data);
+        $URI = 'master/modules';
+        $judul = 'Modules';        
+        $data = ['URI' => $URI, 'judul' => $judul, 'items' => $this->smarty_acl->modules()];
+        $this->template->load('app', 'admin/modules', $data);
     }
 
     /*
@@ -193,13 +195,16 @@ class Admin extends CI_Controller
             //Created
             if ($module) {
                 $this->session->set_flashdata('success_msg', 'Module created successfully!');
-                return redirect('/admin/modules');
+                return redirect('/master/modules');
             }
             $this->session->set_flashdata('error_msg', $this->smarty_acl->errors());
-            return redirect(current_url());
+            return redirect(current_url());            
         }
-        $data = ['form_action' => base_url('admin/modules/create')];
-        $this->admin_views('modules_form', $data);
+        $data = [
+            'judul' => 'Tambah Module',
+            'form_action' => base_url('master/modules/create')
+        ];
+        $this->template->load('app', 'admin/modules_form', $data);        
     }
 
     /**
@@ -213,7 +218,7 @@ class Admin extends CI_Controller
         $item = $this->smarty_acl->module($module_id);
         if (!$item) {
             $this->session->set_flashdata('error_msg', 'Item not found!');
-            return redirect('admin/modules');
+            return redirect('master/modules');
         }
         //Rules
         $this->form_validation->set_rules('name', 'Name', 'trim|required');
@@ -230,13 +235,17 @@ class Admin extends CI_Controller
             //Updated
             if ($module_update) {
                 $this->session->set_flashdata('success_msg', 'Module updated successfully!');
-                return redirect('/admin/modules');
+                return redirect('/master/modules');
             }
             $this->session->set_flashdata('error_msg', $this->smarty_acl->errors());
             return redirect(current_url());
         }
-        $data = ['form_action' => base_url("admin/modules/edit/$module_id"), 'item' => $item];
-        $this->admin_views('modules_form', $data);
+        $data = [
+            'judul' => 'Edit Module',
+            'form_action' => base_url("master/modules/edit/$module_id"), 
+            'item' => $item
+        ];
+        $this->template->load('app', 'admin/modules_form', $data);        
     }
 
     /**
@@ -269,9 +278,10 @@ class Admin extends CI_Controller
      */
     public function admins()
     {
-        $URI = 'admin/admins';
-        $data = ['URI' => $URI, 'items' => $this->smarty_acl->admins()];
-        $this->admin_views('admins', $data);
+        $judul = 'Admins';        
+        $URI = 'master/admins';
+        $data = ['URI' => $URI, 'judul' => $judul, 'items' => $this->smarty_acl->admins()];
+        $this->template->load('app', 'admin/admins', $data);
     }
 
     /*
@@ -302,16 +312,17 @@ class Admin extends CI_Controller
             //Created
             if ($admin) {
                 $this->session->set_flashdata('success_msg', 'Admin created successfully!');
-                return redirect('/admin/admins');
+                return redirect('/master/admins');
             }
             $this->session->set_flashdata('error_msg', $this->smarty_acl->errors());
             return redirect(current_url());
         }
         $data = [
-            'form_action' => base_url('admin/admins/create'),
+            'judul' => 'Tambah Admin',
+            'form_action' => base_url('master/admins/create'),
             'roles' => $this->smarty_acl->roles()
         ];
-        $this->admin_views('admins_form', $data);
+        $this->template->load('app', 'admin/admins_form', $data);        
     }
 
     /**
@@ -325,7 +336,7 @@ class Admin extends CI_Controller
         $item = $this->smarty_acl->get_admin($admin_id);
         if (!$item) {
             $this->session->set_flashdata('error_msg', 'Item not found!');
-            return redirect('admin/admins');
+            return redirect('master/admins');
         }
         //Rules
         $this->form_validation->set_rules('username', 'Username', 'trim|required|alpha_dash');
@@ -351,17 +362,18 @@ class Admin extends CI_Controller
             //Updated
             if ($admin_update) {
                 $this->session->set_flashdata('success_msg', 'Admin updated successfully!');
-                return redirect('/admin/admins');
+                return redirect('/master/admins');
             }
             $this->session->set_flashdata('error_msg', $this->smarty_acl->errors());
             return redirect(current_url());
         }
         $data = [
-            'form_action' => base_url("admin/admins/edit/$admin_id"),
+            'judul' => 'Edit Admin',
+            'form_action' => base_url("master/admins/edit/$admin_id"),
             'item' => (object)$item,
             'roles' => $this->smarty_acl->roles()
         ];
-        $this->admin_views('admins_form', $data);
+        $this->template->load('app', 'admin/admins_form', $data);        
     }
 
     /**
@@ -394,9 +406,10 @@ class Admin extends CI_Controller
      */
     public function users()
     {
-        $URI = 'admin/users';
-        $data = ['URI' => $URI, 'items' => $this->smarty_acl->users()];
-        $this->admin_views('users', $data);
+        $URI   = 'master/users';
+        $judul = 'Users';
+        $data = ['URI' => $URI, 'judul' => $judul, 'items' => $this->smarty_acl->users()];
+        $this->template->load('app', 'admin/users', $data);        
     }
 
     /*
@@ -426,15 +439,16 @@ class Admin extends CI_Controller
             //Created
             if ($user) {
                 $this->session->set_flashdata('success_msg', 'User created successfully!');
-                return redirect('/admin/users');
+                return redirect('/master/users');
             }
             $this->session->set_flashdata('error_msg', $this->smarty_acl->errors());
             return redirect(current_url());
         }
         $data = [
-            'form_action' => base_url('admin/users/create')
+            'judul' => 'Tambah User',
+            'form_action' => base_url('master/users/create')
         ];
-        $this->admin_views('users_form', $data);
+        $this->template->load('app', 'admin/users_form', $data);        
     }
 
     /**
@@ -448,7 +462,7 @@ class Admin extends CI_Controller
         $item = $this->smarty_acl->get_user($user_id);
         if (!$item) {
             $this->session->set_flashdata('error_msg', 'Item not found!');
-            return redirect('admin/users');
+            return redirect('master/users');
         }
         //Rules
         $this->form_validation->set_rules('username', 'Username', 'trim|required|alpha_dash');
@@ -472,16 +486,17 @@ class Admin extends CI_Controller
             //Updated
             if ($user_update) {
                 $this->session->set_flashdata('success_msg', 'Admin updated successfully!');
-                return redirect('/admin/users');
+                return redirect('/master/users');
             }
             $this->session->set_flashdata('error_msg', $this->smarty_acl->errors());
             return redirect(current_url());
         }
         $data = [
-            'form_action' => base_url("admin/users/edit/$user_id"),
+            'judul' => 'Tambah User',
+            'form_action' => base_url("master/users/edit/$user_id"),
             'item' => (object)$item,
         ];
-        $this->admin_views('users_form', $data);
+        $this->template->load('app', 'admin/users_form', $data);        
     }
 
     /**
@@ -495,16 +510,16 @@ class Admin extends CI_Controller
         $item = $this->smarty_acl->get_user($user_id);
         if (!$item) {
             $this->session->set_flashdata('error_msg', 'Item not found!');
-            return redirect('admin/users');
+            return redirect('master/users');
         }
         //Delete user
         $user_delete = $this->smarty_acl->delete_user($item['id'],FALSE);
         //Deleted
         if ($user_delete) {
             $this->session->set_flashdata('success_msg', 'Admin deleted successfully!');
-            return redirect('/admin/users');
+            return redirect('/master/users');
         }
         $this->session->set_flashdata('error_msg', $this->smarty_acl->errors());
-        return redirect('/admin/users');
+        return redirect('/master/users');
     }
 }
