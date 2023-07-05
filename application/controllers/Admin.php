@@ -81,7 +81,7 @@ class Admin extends CI_Controller
             ]);
             //Created
             if ($role) {
-                $this->session->set_flashdata('success_msg', 'Role created successfully!');
+                $this->session->set_flashdata('success_msg', 'Role berhasil dibuat!');
                 return redirect('/master/roles');
             }
             $this->session->set_flashdata('error_msg', $this->smarty_acl->errors());
@@ -121,7 +121,7 @@ class Admin extends CI_Controller
             ]);
             //Updated
             if ($role_update) {
-                $this->session->set_flashdata('success_msg', 'Role updated successfully!');
+                $this->session->set_flashdata('success_msg', 'Role berhasil diupdate!');
                 return redirect('/master/roles');
             }
             $this->session->set_flashdata('error_msg', $this->smarty_acl->errors());
@@ -154,7 +154,7 @@ class Admin extends CI_Controller
         $role_delete = $this->smarty_acl->delete_role($item->id);
         //Deleted
         if ($role_delete) {
-            $this->session->set_flashdata('success_msg', 'Role deleted successfully!');
+            $this->session->set_flashdata('success_msg', 'Role berhasil dihapus!');
             return redirect('/master/roles');
         }
         $this->session->set_flashdata('error_msg', $this->smarty_acl->errors());
@@ -194,7 +194,7 @@ class Admin extends CI_Controller
             ]);
             //Created
             if ($module) {
-                $this->session->set_flashdata('success_msg', 'Module created successfully!');
+                $this->session->set_flashdata('success_msg', 'Module berhasil dibuat!');
                 return redirect('/master/modules');
             }
             $this->session->set_flashdata('error_msg', $this->smarty_acl->errors());
@@ -234,7 +234,7 @@ class Admin extends CI_Controller
             ]);
             //Updated
             if ($module_update) {
-                $this->session->set_flashdata('success_msg', 'Module updated successfully!');
+                $this->session->set_flashdata('success_msg', 'Module berhasil diupdate!');
                 return redirect('/master/modules');
             }
             $this->session->set_flashdata('error_msg', $this->smarty_acl->errors());
@@ -265,7 +265,7 @@ class Admin extends CI_Controller
         $module_delete = $this->smarty_acl->delete_module($item->id);
         //Deleted
         if ($module_delete) {
-            $this->session->set_flashdata('success_msg', 'Module deleted successfully!');
+            $this->session->set_flashdata('success_msg', 'Module berhasil dihapus!');
             return redirect('/admin/modules');
         }
         $this->session->set_flashdata('error_msg', $this->smarty_acl->errors());
@@ -311,7 +311,7 @@ class Admin extends CI_Controller
                 $this->input->post('role_id', true));
             //Created
             if ($admin) {
-                $this->session->set_flashdata('success_msg', 'Admin created successfully!');
+                $this->session->set_flashdata('success_msg', 'Admin berhasil dibuat!');
                 return redirect('/master/admins');
             }
             $this->session->set_flashdata('error_msg', $this->smarty_acl->errors());
@@ -361,7 +361,7 @@ class Admin extends CI_Controller
             $admin_update = $this->smarty_acl->update_user($data, $item['id']);
             //Updated
             if ($admin_update) {
-                $this->session->set_flashdata('success_msg', 'Admin updated successfully!');
+                $this->session->set_flashdata('success_msg', 'Admin berhasil diupdate!');
                 return redirect('/master/admins');
             }
             $this->session->set_flashdata('error_msg', $this->smarty_acl->errors());
@@ -393,7 +393,7 @@ class Admin extends CI_Controller
         $admin_delete = $this->smarty_acl->delete_user($item['id']);
         //Deleted
         if ($admin_delete) {
-            $this->session->set_flashdata('success_msg', 'Admin deleted successfully!');
+            $this->session->set_flashdata('success_msg', 'Admin berhasil dihapus!');
             return redirect('/admin/admins');
         }
         $this->session->set_flashdata('error_msg', $this->smarty_acl->errors());
@@ -438,7 +438,7 @@ class Admin extends CI_Controller
                 ]);
             //Created
             if ($user) {
-                $this->session->set_flashdata('success_msg', 'User created successfully!');
+                $this->session->set_flashdata('success_msg', 'User berhasil dibuat!');
                 return redirect('/master/users');
             }
             $this->session->set_flashdata('error_msg', $this->smarty_acl->errors());
@@ -485,7 +485,7 @@ class Admin extends CI_Controller
             $user_update = $this->smarty_acl->update_user($data, $item['id'],FALSE);
             //Updated
             if ($user_update) {
-                $this->session->set_flashdata('success_msg', 'Admin updated successfully!');
+                $this->session->set_flashdata('success_msg', 'User berhasil diupdate!');
                 return redirect('/master/users');
             }
             $this->session->set_flashdata('error_msg', $this->smarty_acl->errors());
@@ -516,7 +516,7 @@ class Admin extends CI_Controller
         $user_delete = $this->smarty_acl->delete_user($item['id'],FALSE);
         //Deleted
         if ($user_delete) {
-            $this->session->set_flashdata('success_msg', 'Admin deleted successfully!');
+            $this->session->set_flashdata('success_msg', 'User berhasil dihapus!');
             return redirect('/master/users');
         }
         $this->session->set_flashdata('error_msg', $this->smarty_acl->errors());
